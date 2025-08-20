@@ -158,8 +158,132 @@
   <footer>
     <p>© 2025 Cuidar al que Cuida - Todos los derechos reservados</p>
   </footer>
+  <!-- 🔹 Botón flotante del chat -->
+<div id="chat-button">💬</div>
+
+<!-- 🔹 Ventana del chat (oculta al inicio) -->
+<div id="chat-box">
+  <div id="chat-header">Chat de Apoyo</div>
+  <div id="chat-messages"></div>
+  <div id="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+    <button id="send-btn">Enviar</button>
+  </div>
+</div>
+
+<style>
+  /* Botón flotante */
+  #chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+  }
+
+  /* Caja del chat */
+  #chat-box {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: none; /* Oculta al inicio */
+    flex-direction: column;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+  }
+
+  #chat-header {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+
+  #chat-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  #chat-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  #send-btn {
+    background: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  // Abrir/cerrar el chat
+  const chatButton = document.getElementById("chat-button");
+  const chatBox = document.getElementById("chat-box");
+  chatButton.addEventListener("click", () => {
+    chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+  });
+
+  // Simulación de respuestas (ejemplo restringido a temas emocionales)
+  const sendBtn = document.getElementById("send-btn");
+  const chatInput = document.getElementById("chat-input");
+  const chatMessages = document.getElementById("chat-messages");
+
+  sendBtn.addEventListener("click", () => {
+    const userMessage = chatInput.value.trim();
+    if (userMessage === "") return;
+
+    // Mostrar mensaje del usuario
+    const userDiv = document.createElement("div");
+    userDiv.textContent = "Tú: " + userMessage;
+    chatMessages.appendChild(userDiv);
+
+    // Respuesta automática básica
+    const botDiv = document.createElement("div");
+    if (userMessage.toLowerCase().includes("ansiedad") || userMessage.toLowerCase().includes("estrés")) {
+      botDiv.textContent = "Recuerda que la respiración profunda puede ayudarte a calmarte. ¿Quieres que te enseñe un ejercicio?";
+    } else if (userMessage.toLowerCase().includes("depresión") || userMessage.toLowerCase().includes("triste")) {
+      botDiv.textContent = "Lamento que te sientas así 💚. No estás solo, hablar sobre lo que sientes ya es un gran paso.";
+    } else {
+      botDiv.textContent = "Estoy aquí para apoyarte. Podemos hablar de ansiedad, depresión, estrés o autocuidado.";
+    }
+    chatMessages.appendChild(botDiv);
+
+    // Limpiar input
+    chatInput.value = "";
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  });
+</script>
+
 </body>
 </html>
+
 
 
 
